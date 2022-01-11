@@ -42,10 +42,16 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="<?php echo base_url(); ?>/register"><i class="fa fa-plus"></i> Đăng Ký</a></li>
-                    <li><a href="<?php echo base_url(); ?>/login"><i class="fa fa-sign-in"></i> Đăng Nhập</a></li>
-                    <li><a href="<?php echo base_url(); ?>/remember"><i class="fa fa-question"></i>
+                    <?php if(!isLogin()) { ?>
+                    <li><a href="<?php echo base_url(); ?>/user/register"><i class="fa fa-plus"></i> Đăng Ký</a></li>
+                    <li><a href="<?php echo base_url(); ?>/user/login"><i class="fa fa-sign-in"></i> Đăng Nhập</a></li>
+                    <li><a href="<?php echo base_url(); ?>/user/remember"><i class="fa fa-question"></i>
                             Quên MK?</a></li>
+                    <?php } else { ?>
+                    <li><a href="<?php echo base_url(); ?>/admin/"><i class="fa fa-user"></i> Quản trị</a></li>
+                    <li><a href="<?php echo base_url(); ?>/admin/posts"><i class="fa fa-plus"></i> Thêm bài viết</a></li>
+                    <li><a href="<?php echo base_url(); ?>/user/logout"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                    <?php }  ?>
                 </ul>
             </div>
         </div>

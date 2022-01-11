@@ -9,3 +9,4 @@ RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?con
 RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?controller=$1&action=$2&param=$3&param2=$4 [L,QSA]
 RewriteRule ^([a-zA-Z0-9-_]+)/?$ index.php?controller=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?controller=$1&action=$2 [L,QSA]
+RewriteRule ^user/login/?$ index.php?controller=auth&action=login [L,QSA]

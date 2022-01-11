@@ -20,7 +20,7 @@ define('__DB_NAME','myblog');
 /**
  *define url site ex : http://nam.name.vn 
  */
-define('__SITE_URL','http://localhost/mini_project');
+define('__SITE_URL','http://localhost/modulePHPSun/mini_project');
 
 
 /**
