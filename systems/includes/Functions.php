@@ -71,7 +71,7 @@ if ( ! function_exists('createPage'))
 {
     function createPage($config)
     {
-        $page = '<div class="pagination">';
+        $page = '<div style="text-align:center;"><ul class="pagination pagination-sm" style="text-align:center">';
         $num_page   = ceil($config['total_record']/$config['limit']);
         $start      = $config['current_page'] - 2 ;
         $stop       = (int)($config['current_page'] + 2) ;
@@ -81,7 +81,7 @@ if ( ! function_exists('createPage'))
         if( $config['current_page'] > 1 )
         {
             if($config['current_page']>=4){
-                $page .= '<a href="'.base_url().$config['link'].'1'.$config['endlink'].'" title="trang 1" class="first">first</a>';
+                $page .= '<li><a href="'.base_url().$config['link'].'1'.$config['endlink'].'" title="trang 1" class="first"><span aria-hidden="true">&laquo;</span></a><li>';
             }
         }
         
@@ -89,20 +89,20 @@ if ( ! function_exists('createPage'))
         for( $i = $start ; $i <= $stop ; $i++ )
         {
             if( $i == $config['current_page'] || ( empty($config['current_page']) && $i == 1 ) )
-                $page .= '<a class="current">'.$i.'</a>';
+                $page .= '<li class="active"><a>'.$i.'</a></li>';
             else
-                $page .= '<a href="'.base_url().$config['link'].$i.$config['endlink'].'" title="trang '.$i.'">'.$i.'</a>';
+                $page .= '<li><a href="'.base_url().$config['link'].$i.$config['endlink'].'" title="trang '.$i.'">'.$i.'</a></li>';
         }
 
         if( $config['current_page'] < $num_page )
         {
             //$page .= '<li><a href="'.__SITE_URL.$config['link'].($config['current_page']+1).'" title="trang '.($config['current_page']+1).'">next</a></li>';
             if($config['current_page'] < ($num_page - 2)){
-                $page .= '<a href="'.base_url().$config['link'].$num_page.$config['endlink'].'" title="trang '.$num_page.'" class="last">last</a>';
+                $page .= '<li><a href="'.base_url().$config['link'].$num_page.$config['endlink'].'" title="trang '.$num_page.'" class="last"><span aria-hidden="true">&raquo;</span></a></li>';
             }
         }
 
-        return $page.'</div>';
+        return $page.'</ul></div>';
     }
 }
 

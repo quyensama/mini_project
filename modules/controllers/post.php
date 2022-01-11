@@ -4,7 +4,7 @@
  */
 class Post extends Controller
 {
-    private $_limit = 20,
+    private $_limit = 10,
             $_total,
             $_page_current,
             $_total_page,
@@ -17,6 +17,7 @@ class Post extends Controller
         global $configs;
         $this->load->model('mpost');
         $this->MPost = new MPost;
+        $this->_total_page = ceil($this->MPost->countAll()/$this->_limit);
     }
 
     /**
@@ -108,7 +109,6 @@ class Post extends Controller
                 'name' => 'Cùng Chuyên Mục',
                 'alias'=> '/category/'.$data['detailPost']['url_cate']
             );
-            $relate['page'] = '<div class="item" style="text-align: center"><a href="'.base_url().'/category/'.$data['detailPost']['url_cate'].'" title="'.$data['detailPost']['category'].'">Xem thêm</a></div>';
 
             $this->load->header($data['meta']);
             
@@ -143,4 +143,18 @@ class Post extends Controller
         return rtrim($str_tag,',');
     }
 
+    /**
+     * phương thức phân trang
+     */
+    public function page($page = 1)
+    {
+        if($page == null || $page <= 0){
+            $page = 1;
+        }
+        $this->_page_current = abs((int)$page);
+        if($this->_page_current <= 0 || $this->_page_current > $this->_total_page )
+            $this->_page_current = 1 ;
+        $this->_record_current = ($this->_page_current - 1) * $this->_limit ;
+        $this->showListPost($this->_record_current);
+    }
 }

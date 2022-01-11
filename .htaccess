@@ -3,3 +3,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([a-zA-Z0-9-_]+).html$ index.php?controller=post&action=viewPost&param=$1 [L,QSA]
 RewriteRule ^category/([a-zA-Z0-9-_]+)/?$ ?controller=category&action=page&param=$1 [L,QSA]
+RewriteRule ^category/([a-zA-Z0-9-_]+)/([-0-9]+)/?$ ?controller=category&action=page&param=$1&param2=$2 [L,QSA]
+RewriteRule ^page/([-0-9]+)$ ?controller=post&action=page&param=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?controller=$1&action=$2&param=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?controller=$1&action=$2&param=$3&param2=$4 [L,QSA]
+RewriteRule ^([a-zA-Z0-9-_]+)/?$ index.php?controller=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?controller=$1&action=$2 [L,QSA]

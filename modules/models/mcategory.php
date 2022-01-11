@@ -31,4 +31,21 @@ class Mcategory extends Model
         $query  = $this->db->table('posts')->getAll('id_category = '.$idCategory);
         return  $query->num_rows;
     }
+
+    public function getInfo($url){
+        $query  = $this->db->table('categories')->getAll('slug = \''.$url.'\'');
+        return  $query->fetch_array(MYSQLI_ASSOC);
+    }
+
+    public function countAll($id_category){
+        $query  = $this->db->table('categories')->getAll('parent = '.$id_category);
+        $listID = array();
+        while ($data = $query->fetch_array(MYSQLI_ASSOC)){
+            $listID[] = "'{$data['id']}'";
+        }
+        $listID = rtrim("'$id_category',".implode(',', $listID), ',');
+        $sql = "SELECT b.id FROM posts AS b, categories AS c WHERE b.id_category = c.id AND id_category IN ({$listID})";
+        $query  = $this->db->query($sql);
+        return  $query->num_rows;
+    }
 }

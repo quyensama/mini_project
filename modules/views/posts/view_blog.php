@@ -27,6 +27,10 @@ if(empty($data['content'])){
         <div class="list-group-item">
             <?php echo $data['content']; ?>
         </div>
+        <div class="list-group-item">
+            Tags: <?php echo $data['tags']; ?>
+        </div>
+
     </div>
 </div>
 
@@ -34,9 +38,8 @@ if(empty($data['content'])){
 
 <div class="col-sm-3">
 
-</div>
 
-<?php echo $data['tags']; ?>
+
 <!--kết thúc show nội dung bài viết-->
 
 <?php } ?>
