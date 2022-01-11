@@ -128,7 +128,7 @@ class Database
         $valueMark = implode(', ', array_fill(0, count($data), '?'));
         $values = array_values($data);
 
-        $sql = "INSERT INTO `$this->table`($fields) VALUES($valueStr)";
+        $sql = "INSERT INTO `$this->table`($fields) VALUES($valueMark)";
         $this->statement = $this->connection->prepare($sql);
         $this->statement->bind_param($this->param_mask($values), ...$values);
         $this->statement->execute();

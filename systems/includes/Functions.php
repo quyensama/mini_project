@@ -62,6 +62,31 @@ if ( ! function_exists('show_alert'))
     }
 }
 
+/**
+ * 
+ * Check đăng nhập người dùng
+ */
+if ( ! function_exists('isLogin'))
+{
+    function isLogin(){
+        if(isset($_SESSION['permission']) && isset($_SESSION['username'])) {
+            return true;
+        }
+        if(isset($_COOKIE['permission']) && isset($_COOKIE['username']) && isset($_COOKIE['password'])){
+            $infoUser   = MUser::getInfo(urldecode($_COOKIE['username']), urldecode($_COOKIE['password']));
+            if(!empty($infoUser)){
+                $_SESSION['permission'] = true;
+                $_SESSION['id']       = $_COOKIE['id'];
+                $_SESSION['username']       = $_COOKIE['username'];
+                $_SESSION['full_name']  = $_COOKIE['full_name'];
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+}
 
 
 /**
