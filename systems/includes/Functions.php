@@ -18,43 +18,43 @@ if ( ! function_exists('show_alert'))
         switch ($typeAlert) {
             case '1':
                 foreach($arrAlert as $error){
-                    echo '<div class="alert success">
+                    echo '<div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <p><strong> '.$error.'.</strong></p>
-                        <p><a class="alert-close" href="javascript:void(0);">Close</a></p>
                     </div>';
                 }       
                 break;
                     
             case '2':
                 foreach($arrAlert as $error){
-                    echo '  <div class="alert warning">
+                    echo '  <div class="alert alert-warning">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <p><strong> '.$error.'.</strong></p>
-                            <p><a class="alert-close" href="javascript:void(0);">Close</a></p>
                         </div>';
                 }
                 break;
         
             case '3':
                 foreach($arrAlert as $error){
-                    echo '<div class="alert error">
+                    echo '<div class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <p><strong> '.$error.'.</strong></p>
-                            <p><a class="alert-close" href="javascript:void(0);">Close</a></p>
                             </div>';
                 }
                 break;
             case '4':
                 foreach($arrAlert as $error){
-                    echo '<div class="alert info">
+                    echo '<div class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <p><strong> '.$error.'.</strong></p>
-                            <p><a class="alert-close" href="javascript:void(0);">Close</a></p>
                         </div>';
                 }
                 break;
             case '5':
                 foreach($arrAlert as $error){
-                    echo '<div class="alert help">
+                    echo '<div class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <p><strong> '.$error.'.</strong> </p>
-                            <p><a class="alert-close" href="javascript:void(0);">Close</a></p>
                         </div>';
                 }
                 break;
@@ -105,6 +105,48 @@ if ( ! function_exists('createPage'))
         return $page.'</div>';
     }
 }
+
+
+/**
+ * param function breadcrumb
+ * $arrValue is array
+ * ex $array = array(
+                    array(
+                        'title'     => 'chuyên mục 1',
+                        'link'      => 'chuyen-muc-1'
+                    )
+                );
+ * 
+ */
+if ( ! function_exists('breadcrumb'))
+{
+    function breadcrumb($arrValue){
+        
+        $result  = '<nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <span itemtype="http://data-vocabulary.org/Breadcrumb" itemscope>
+                                    <a itemprop="url" href="'.__SITE_URL.'">
+                                        <span itemprop="title"> Trang chủ</span>
+                                    </a>
+                                </span>
+                            </li>';
+                    
+        foreach($arrValue as $value){
+            $result .= '<li class="breadcrumb-item">
+                            <span itemtype="http://data-vocabulary.org/Breadcrumb" itemscope>
+                                <a itemprop="url" href="'.$value['link'].'">
+                                    <span itemprop="title">'.$value['title'].'</span>
+                                </a>
+                            </span>
+                        </li>';
+            
+        }
+        $result .= '</nav>';
+        return $result;
+    }
+}
+
 
 /**
  * param of function show_alert
@@ -165,5 +207,32 @@ if ( ! function_exists('convertString'))
             $string=str_replace(' ','-',$string);
         }
         return $string;
+    }
+}
+
+
+if ( ! function_exists('convertTimeToString'))
+{
+    function convertTimeToString($time)
+    {
+        $distance = time() - $time;
+        switch ($distance) {
+            case ($distance < 60):
+                $result = $distance . ' giây trước';
+                break;
+            case ($distance >= 60 && $distance < 3600):
+                $result = round($distance/60) . ' phút trước';
+                break;
+            case ($distance >= 3600 && $distance < 86400):
+                $result = round($distance/3600) . ' giờ trước';
+                break;
+            case (round($distance/86400) == 1):
+                $result =  '1 ngày trước';
+                break;
+            default:
+                $result =  date('d/m/y \l\ú\c H:s:i', $time);
+                break;
+        }
+        return $result;
     }
 }

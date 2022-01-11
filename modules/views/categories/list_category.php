@@ -1,10 +1,14 @@
-<div class="title_menu">Danh Sách Chuyên Mục</div>
+<div class="col-sm-4">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Danh Sách Chuyên Mục
+		</div>
+		<div class="list-group">
 <?php
 foreach ( $data as $key => $category ) {
 	?>
-<div class="list">
-	<img src="<?php echo base_url();?>/publics/images/cat.png"
-		alt="ảnh cm" title="ảnh cm"> <a
+<div class="list-group-item">
+	<i class="fa fa-book"></i> <a
 		href="<?php echo base_url().'/category/'.$category['slug']; ?>"
 		title="<?php echo $category['name']; ?>"> <b><?php echo $category['name']; ?></b>
 	</a>
@@ -17,3 +21,5 @@ if (empty ( $data )) {
 	) );
 }
 ?>
+	</div>
+</div>

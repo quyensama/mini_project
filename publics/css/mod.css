@@ -1,0 +1,15 @@
+.codepopup {margin-top: 3px;}
+.codepopup a {border: 1px solid #a7a7a7;border-radius: 3px;background-color: #dddddd;color: black;font-weight: bold;padding: 2px 6px 2px 6px;display: inline-block;margin-right: 6px;margin-bottom: 3px;text-decoration: none;}
+.color a {float:left; display: block; width: 10px; height: 10px; margin: 1px; border: 1px solid black;}
+
+/* bbCode */
+.bbCodeBlock{border:1px solid #ccc}
+.bbCodeBlock .type {font-weight:700;color: #444;background-color: #E8F4FD;padding: 3px 8px;border-bottom: 1px solid #ccc}
+.bbCodeBlock .code{white-space:nowrap;font-size:10pt;font-family:Consolas,'Courier New',Courier,monospace;word-wrap:normal;overflow:auto;line-height:1.24;}
+.bbCodeBlock .code ol {padding-left:30px}
+.bbCodeQuote blockquote{font-style: italic;background-color: #fff6d4;padding: 5px 10px}
+
+.video-wrapper {max-width:500px; margin-left: auto;margin-right: auto}
+.video-container {position: relative;display: block;height: 0;padding: 0;padding-bottom: 56.25%;overflow: hidden}
+.video-container iframe, .video-container object, .video-container embed, .video-container video {position: absolute;top: 0;bottom: 0;left: 0;width: 100%;height: 100%;border: 0}
+textarea{width:100%;resize:vertical}

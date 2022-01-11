@@ -12,13 +12,23 @@ class MPost extends Model
     //phuong thức lấy danh sách bài viết
     public function getListPost($where ='',$oder = 'times', $start, $limit)
     {
-        $sql      = 'SELECT `posts`.`id` AS `post_id`, `posts`.`id_author`, `users`.`username`, `posts`.`id_category`, `categories`.`name` AS `category`, `posts`.`title`, `posts`.`content`, `posts`.`times`, `posts`.`thumbnail`, `posts`.`status`, `posts`.`slug` FROM `posts` INNER JOIN `categories` ON `categories`.`id` = `posts`.`id_category` INNER JOIN `users` ON `users`.`id` = `posts`.`id_author` WHERE `posts`.`status` = 1 '.$where.' ORDER BY '.$oder.' DESC LIMIT '.$start.','.$limit;
+        $sql      = 'SELECT `posts`.`id` AS `post_id`, `posts`.`id_author`, `users`.`username`, `posts`.`id_category`, `categories`.`name` AS `category`, `categories`.`slug` AS `url_cate`, `posts`.`title`, `posts`.`content`, `posts`.`times`, `posts`.`thumbnail`, `posts`.`status`, `posts`.`slug` FROM `posts` INNER JOIN `categories` ON `categories`.`id` = `posts`.`id_category` INNER JOIN `users` ON `users`.`id` = `posts`.`id_author` WHERE `posts`.`status` = 1 '.$where.' ORDER BY '.$oder.' DESC LIMIT '.$start.','.$limit;
                      
         if($where != null){
-            $sql   = 'SELECT `posts`.`id` AS `post_id`, `posts`.`id_author`, `users`.`username`, `posts`.`id_category`, `categories`.`name` AS `category`, `posts`.`title`, `posts`.`content`, `posts`.`times`, `posts`.`thumbnail`, `posts`.`status`, `posts`.`slug` FROM `posts` INNER JOIN `categories` ON `categories`.`id` = `posts`.`id_category` INNER JOIN `users` ON `users`.`id` = `posts`.`id_author` WHERE `posts`.`status` = 1 AND `posts`.`id_category` = (SELECT `id` AS `id_category` FROM `categories` WHERE `categories`.`slug`=\''.$where.'\') ORDER BY '.$oder.' DESC LIMIT '.$start.','.$limit;
+            $sql   = 'SELECT `posts`.`id` AS `post_id`, `posts`.`id_author`, `users`.`username`, `posts`.`id_category`, `categories`.`name` AS `category`, `categories`.`slug` AS `url_cate`, `posts`.`title`, `posts`.`content`, `posts`.`times`, `posts`.`thumbnail`, `posts`.`status`, `posts`.`slug` FROM `posts` INNER JOIN `categories` ON `categories`.`id` = `posts`.`id_category` INNER JOIN `users` ON `users`.`id` = `posts`.`id_author` WHERE `posts`.`status` = 1 AND `posts`.`id_category` = (SELECT `id` AS `id_category` FROM `categories` WHERE `categories`.`slug`=\''.$where.'\') ORDER BY '.$oder.' DESC LIMIT '.$start.','.$limit;
         }
         $query    = $this->db->query($sql);
         $result   = $query->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    //phuong thức lấy thông tin 1 bài viết
+    public function getDetailPost($url)
+    {
+        $sql      = 'SELECT `posts`.`id` AS `post_id`, `posts`.`id_author`, `users`.`username`, `posts`.`id_category`, `categories`.`name` AS `category`, `categories`.`slug` AS `url_cate`, `categories`.`parent` AS `id_parent`, `posts`.`title`, `posts`.`content`, `posts`.`description`, `posts`.`keyword`, `posts`.`times`, `posts`.`thumbnail`, `posts`.`status`, `posts`.`slug` FROM `posts` INNER JOIN `categories` ON `categories`.`id` = `posts`.`id_category` INNER JOIN `users` ON `users`.`id` = `posts`.`id_author` WHERE `posts`.`slug` = \''.$url.'\' ;';
+
+        $query    = $this->db->query($sql);
+        $result   = $query->fetch_array(MYSQLI_ASSOC);
         return $result;
     }
 

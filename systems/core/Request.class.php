@@ -117,7 +117,7 @@ class Request extends Controller
                         {
                             $this->load->header();
 
-                            show_alert(3,'chưa tồn tại phương thức index');
+                            show_alert(3,array('chưa tồn tại phương thức index'));
 
                             $this->load->footer();
                         }
@@ -133,13 +133,11 @@ class Request extends Controller
                             $this->_action .= '(\''.$this->_param.'\')';
                         }
 
-                        $this->_Temp->{$this->_action}();
-
-                        /*
+                        
                         $strCode = '<?php $this->_Temp->'.$this->_action . ' ?>';
 
                         eval('?>' .$strCode);
-                        */
+                        
                     }
                     
                 }
