@@ -27,6 +27,7 @@ class MUser extends Model
     
     function register($data){
         $sql    = 'INSERT INTO users SET username =\''.$data['username'].'\', password =\''.$data['password'].'\', full_name =\''.$data['full_name'].'\', email =\''.$data['email'].'\'';
+        $this->db->query($sql);
     }
     
     function updateInfo($data){
