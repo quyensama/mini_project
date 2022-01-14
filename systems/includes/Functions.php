@@ -61,6 +61,19 @@ if ( ! function_exists('show_alert'))
         }
     }
 }
+/**
+ * 
+ * Lấy thông tin đăng nhập người dùng
+ */
+if ( ! function_exists('getInfo'))
+{
+    function getInfo($username, $password){
+        global $DB;
+        $query = $DB->table('users')->getAll('`username` = \''.$username.'\' AND `password` = \''.$password.'\'');
+        $info = $query->fetch_array(MYSQLI_ASSOC);
+        return $info;
+    }
+}
 
 /**
  * 
@@ -73,12 +86,14 @@ if ( ! function_exists('isLogin'))
             return true;
         }
         if(isset($_COOKIE['permission']) && isset($_COOKIE['username']) && isset($_COOKIE['password'])){
-            $infoUser   = MUser::getInfo(urldecode($_COOKIE['username']), urldecode($_COOKIE['password']));
+            $infoUser   = getInfo(urldecode($_COOKIE['username']), urldecode($_COOKIE['password']));
             if(!empty($infoUser)){
                 $_SESSION['permission'] = true;
-                $_SESSION['id']       = $_COOKIE['id'];
-                $_SESSION['username']       = $_COOKIE['username'];
-                $_SESSION['full_name']  = $_COOKIE['full_name'];
+                $_SESSION['id'] = $infoUser['id'];
+                $_SESSION['password'] = $infoUser['password'];
+                $_SESSION['username'] = $infoUser['username'];
+                $_SESSION['full_name'] = $infoUser['full_name'];
+                $_SESSION['level'] = $infoUser['level'];
                 return true;
             }else{
                 return false;
