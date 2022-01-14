@@ -156,7 +156,6 @@ class Database
         $this->statement->bind_param($this->param_mask($values), ...$values);
         $this->statement->execute();
         $this->reset();
-
         return $this->statement;
     }
 

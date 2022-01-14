@@ -5,12 +5,14 @@
  */
 class Madmin extends Model
 {
-    
-    function __construct(){
+
+    function __construct()
+    {
         parent::__construct();
     }
-    
-    function insertPost($data){
+
+    function insertPost($data)
+    {
 
         $data_insert = array(
             'id_author' => (int)$data['id_author']['value'],
@@ -29,7 +31,8 @@ class Madmin extends Model
         return $this->db->table('posts')->insert($data_insert)->affected_rows >= 1;
     }
 
-    function updatePost($data){
+    function updatePost($data)
+    {
         $data_update = array(
             'id_category' => (int)$data['id_category']['value'],
             'title' => $data['title']['value'],
@@ -45,42 +48,94 @@ class Madmin extends Model
         return $this->db->table('posts')->updateRow($data['id']['value'], $data_update)->affected_rows >= 1;
     }
 
-    function deletePost($id){
+    function deletePost($id)
+    {
         $query = $this->db->table('posts')->deleteId($id);
         return $query->affected_rows > 0;
     }
 
-    function checkAlias($alias){
-        $query = $this->db->table('posts')->getAll('`slug` = \''.$alias.'\'');
+    function checkAlias($alias)
+    {
+        $query = $this->db->table('posts')->getAll('`slug` = \'' . $alias . '\'');
         return $query->fetch_array(MYSQLI_ASSOC);
     }
 
-    function checkPostID($id){
-        $query = $this->db->table('posts')->getAll('`id` = '.$id.'');
+    function checkPostID($id)
+    {
+        $query = $this->db->table('posts')->getAll('`id` = ' . $id . '');
         return $query->fetch_array(MYSQLI_ASSOC);
     }
 
-    function updateStatus($id, $data){
+    function updateStatus($id, $data)
+    {
         $query = $this->db->table('posts')->updateRow($id, $data);
         return $query->affected_rows >= 1;
     }
 
-    function coutPost($type) {
-        $query = $this->db->table('posts')->getAll('status = '.$type);
+    function coutPost($type)
+    {
+        $query = $this->db->table('posts')->getAll('status = ' . $type);
         return $query->num_rows;
     }
 
-    function getAllPost($type, $start, $limit) {
+    function getAllPost($type, $start, $limit)
+    {
         $sql  = "SELECT `id`, `title`, `slug` FROM `posts` WHERE `status` = $type ORDER BY `id` DESC LIMIT $start, $limit";
         $query    = $this->db->query($sql);
-        
+
         $result = $query->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
 
-    function getListCategory(){
+    function insertCategory($data)
+    {
+        $data_insert = array(
+            'name' => $data['name']['value'],
+            'description' => $data['description']['value'],
+            'keyword' => $data['keyword']['value'],
+            'parent' => $data['parent']['value'],
+            'slug' => $data['slug']['value']
+        );
+        return $this->db->table('categories')->insert($data_insert)->affected_rows >= 1;
+    }
+
+    function updateCategory($data)
+    {
+        $data_update = array(
+            'name' => $data['name']['value'],
+            'description' => $data['description']['value'],
+            'keyword' => $data['keyword']['value'],
+            'parent' => $data['parent']['value'],
+            'slug' => $data['slug']['value']
+        );
+        return $this->db->table('categories')->updateRow($data["id"]['value'], $data_update)->affected_rows >= 1;
+    }
+
+    function deleteCategory($slug)
+    {
+        $sql  = 'DELETE FROM categories WHERE slug = \'' . $slug . '\'';
+        return $this->db->query($sql);
+    }
+    public function getInfoCategory($slug)
+    {
+        $query  =  $this->db->table('categories')->getAll('`slug` = \'' . $slug . '\'');
+        return $query->fetch_array(MYSQLI_ASSOC);
+    }
+
+    function getListCategory()
+    {
         $query = $this->db->table('categories')->getAll();
         $result = $query->fetch_all(MYSQLI_ASSOC);
         return $result;
+    }
+    public function getTotalBlog($idCategory)
+    {
+        $query  = $this->db->table('posts')->getAll('id_category = ' . $idCategory);
+        return  $query->num_rows;
+    }
+    function checkCategory($slug)
+    {
+        $query = $this->db->table('categories')->getAll('`slug` = \'' . $slug . '\'');
+        return  $query->fetch_array(MYSQLI_ASSOC);
     }
 }

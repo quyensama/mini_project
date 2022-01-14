@@ -14,7 +14,7 @@
 		</div>
 		<div class="list-group-item">
 			<i class="fa fa-th-list" aria-hidden="true"></i>
-			<a href="<?php echo base_url(); ?>/admin/category" title="Quản Lý Chuyên Mục"><span>Quản Lý Chuyên Mục</span></a>
+			<a href="<?php echo base_url(); ?>/admin/category/list" title="Quản Lý Chuyên Mục"><span>Quản Lý Chuyên Mục</span></a>
 		</div>
 		<?php } ?>
 		<div class="list-group-item">
