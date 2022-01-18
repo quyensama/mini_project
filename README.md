@@ -21,6 +21,8 @@ A Mini Project PHP
 - Upload and export mini Project
 - Import database file `myblog.sql`
 - Edit Database Config & SITE_URL at `systems/includes/Configs.php`
+
+
 | Account     | Password    |
 | ----------- | ----------- |
 | admin       | admin       |
