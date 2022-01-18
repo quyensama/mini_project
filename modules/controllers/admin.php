@@ -548,7 +548,6 @@ class Admin extends Controller
                 }else{
                     show_alert(2,array('Bài viết không tồn tại'));
                 }
-                header("Location: ");
                 break;
             case 'delete':
                 $this->data['meta']['title']  = 'Xóa Chuyên Mục';
