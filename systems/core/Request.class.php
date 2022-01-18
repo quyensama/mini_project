@@ -132,9 +132,6 @@ class Request extends Controller
                         {
                             $this->_Temp->{$this->_action}($this->_param);
                         }
-
-                        
-                        $this->_Temp->{$this->_action}();
                         
                     }
                     
