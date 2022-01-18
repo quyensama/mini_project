@@ -21,6 +21,8 @@ A Mini Project PHP
 - Upload and export mini Project
 - Import database file `myblog.sql`
 - Edit Database Config & SITE_URL at `systems/includes/Configs.php`
-
+| Account     | Password    |
+| ----------- | ----------- |
+| admin       | admin       |
 
 &copy; Sun* Inc - Open Education 48 - Trainee: Nguyen Thi Thu Quyen + Pham Thanh Nam
