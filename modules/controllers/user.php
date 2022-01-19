@@ -29,6 +29,11 @@ class User extends Controller
 	{
 		if (isLogin() == true) {
 			show_alert(4, array('Đã đăng nhập'));
+			if($_SESSION['level'] < 9){
+				header("Location:" .base_url());
+			} else {
+				header("Location:" .base_url()."/admin");
+			}
 		} else {
 			show_alert(4, array('Nhập Thông Tin Đăng Nhập'));
 			$this->load->view('user/form-login');
@@ -117,8 +122,6 @@ class User extends Controller
         session_destroy();
         setcookie('username','',time()-86400, '/');
         setcookie('password','',time()-86400, '/');
-        show_alert(1,array('Đăng xuất thành công'));
-        $this->showForm(1);
 		redirect(base_url().'/user/login/');
     }
 	function showForm($type)
